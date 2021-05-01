@@ -9,8 +9,7 @@ cd "$(dirname "$(dirname "$0")")"
 )
 
 if [ ! -f proxy.env ] ; then
-  cat <<_EOF
-_EOF > proxy.env
+  touch proxy.env
 fi
 
 exit $?
