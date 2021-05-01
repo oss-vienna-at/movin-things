@@ -1,0 +1,36 @@
+{
+  "tenant_header": "X-PVP-Roles",
+  "tenant_default": "public",
+  "tenant_regex": "tenant\\(name=(\\w+,?)+(,name=(\\w+))?(,name=(\\w+))?(,name=(\\w+))?\\)",
+  "tenant_result_skip": ["name="],
+  "tenants": {
+    "pace": ["flights-over-austria-config"],
+    "profirator": ["flights-over-austria-config"],
+    "public": ["flights-over-austria-config"]
+  },
+  "configurations": {
+    "flights-over-austria-config": {
+      "usage_configs": ["flights-over-austria-usage"],
+      "zoom": 8,
+      "maxzoom": "19",
+      "minzoom": "6",
+      "attribution": "Map data &copy; <a href=\"https://basemap.at/en/#lizenz\" target=\"_blank\">basemap.at</a>",
+      "geolocation": [47.7, 13.2],
+      "initlayer": "geolandbasemap",
+      "title_attribute": "name",
+      "ms_timeout": 1000,
+      "layers": [
+        {
+          "id": "geolandbasemap",
+          "name": "Streets",
+          "url": "https://maps.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png"
+        },
+        {
+          "id": "bmaporthofoto30cm",
+          "name": "Satellite",
+          "url": "https://maps.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg"
+        }
+      ]
+    }
+  }
+}

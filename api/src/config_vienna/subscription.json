@@ -1,0 +1,5 @@
+{
+  "flights-over-austria-subscription": {
+    "adapter": "flights-over-austria"
+  }
+}

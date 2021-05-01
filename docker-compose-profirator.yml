@@ -1,0 +1,22 @@
+version: '2.2'
+
+services:
+  svc:
+    build:
+      context: "svc"
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: "magwien/movin-things-backend-svc:dev"
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      - "./svc/process.env:/config/process.env"
+      - "./svc/src/config:/svc/build/config"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - svc.docker

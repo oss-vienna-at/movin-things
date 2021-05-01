@@ -1,0 +1,15 @@
+{
+  "name": "Movin Things",
+  "short_name": "Movin",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/icon/moving.png",
+      "sizes": "103x104",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#16161d",
+  "theme_color": "#16161d"
+}

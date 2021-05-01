@@ -1,0 +1,8 @@
+{
+  "demosubscription": {
+    "adapter": "demo_id"
+  },
+  "pollersubscription": {
+    "adapter": "orion_poller"
+  }
+}

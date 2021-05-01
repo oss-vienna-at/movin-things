@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+scale 0.3
+
+start
+:read static configuration;
+if (ok?) then (error)
+    stop
+endif
+:validate static configuration;
+if (ok?) then (error)
+    stop
+endif
+:create tenant_map;
+:create subscription_map with object_maps;
+:create adapter_map;
+:initialize adapters;
+:let adapters create subscriptions;
+repeat
+    :listen for request;
+    :handle request;
+repeat while
+@enduml

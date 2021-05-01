@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "adapter_id": "flights-over-austria",
+      "filename": "orionpoller",
+      "disabled": false,
+      "ms_timeout": 1000,
+      "url": "http://orion-proxy.docker:1026/v2/entities?type=Plane&limit=1000&options=keyValues",
+      "headers": {
+        "accept": "application/json",
+        "fiware-service": "vienna",
+        "fiware-servicepath": "/ma01/pace"
+      }
+    }
+  ]
+}

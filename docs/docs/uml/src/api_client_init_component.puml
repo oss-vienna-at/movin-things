@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+skinparam style strictuml
+
+participant browser as br
+participant proxy as pr
+control backend as b
+entity component_config as c
+
+activate br
+br -> pr: init_component(\n\tconfiguration_name\n)
+deactivate br
+activate pr
+pr -> b: +TENANT_HEADER
+deactivate pr
+activate b
+b -> c:
+c --> b: component_config[configuration_name]\n\t.map_config
+b --> pr:
+deactivate b
+activate pr
+pr --> br:
+deactivate pr
+activate br
+
+@enduml

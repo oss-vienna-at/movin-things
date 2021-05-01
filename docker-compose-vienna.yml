@@ -1,0 +1,80 @@
+version: '2.2'
+
+services:
+  api:
+    build:
+      context: "api"
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: "magwien/movin-things-api:dev"
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    env_file:
+      - api/proxy.env
+    volumes:
+      - "./api/process.env:/config/process.env"
+      - "./api/src/config_vienna:/svc/build/config"
+    depends_on:
+      - orion-proxy
+    mem_limit: 512m
+    memswap_limit: 0b
+    mem_reservation: 256m
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - api.docker
+
+  orion-proxy:
+    build:
+      context: "orion-proxy"
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: magwien/movin-things-orion-proxy
+    ports:
+      - "1026:1026"
+    volumes:
+      - "./orion-proxy/conf:/usr/local/apache2/conf"
+      - "./orion-proxy/conf.d:/usr/local/apache2/conf.d"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - orion-proxy.docker
+
+  demo:
+    build:
+      context: "demo"
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: "magwien/movin-things-demo:dev"
+    ports:
+      - "8081:80"
+    restart: "unless-stopped"
+    networks:
+      default:
+        aliases:
+          - demo.docker
+
+  docs:
+    build:
+      context: "docs"
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: "magwien/movin-things-docs:dev"
+    ports:
+      - "8000:80"
+    restart: "unless-stopped"
+    networks:
+      default:
+        aliases:
+          - docs.docker

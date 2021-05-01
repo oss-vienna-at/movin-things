@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+skinparam style strictuml
+
+participant backend as b
+control config_reader as c
+database config_dir as cd
+control validator as v
+
+b -> c: read_static()
+activate c
+c -> cd: "/config/config.json"
+c -> v : validate(static_config)
+deactivate c
+activate v
+v --> c: valid
+deactivate v
+activate c
+c --> b: static_config
+deactivate c
+
+@enduml

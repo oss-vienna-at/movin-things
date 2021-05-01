@@ -1,0 +1,58 @@
+@import url("../../../node_modules/leaflet/dist/leaflet.css");
+
+header {
+  background: #5851ff;
+  color: white;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+h1 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  padding: 0 12px;
+}
+
+#movinleaflet {
+  display: flex;
+  height: 100vmax;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: space-around;
+}
+
+.markerlabel {
+  font-weight: bolder;
+  color: black;
+  text-shadow: 4px 0 3px #fff, -4px 0 3px #fff, 0 4px 3px #fff, 0 -4px 3px #fff;
+}
+
+.leaflet-div-icon {
+  background-color: transparent;
+  top: 1.7em;
+  left: -1.5em;
+  border: 0px;
+}
+
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: url(assets/icon/settings.svg);
+  background-size: 26px 26px;
+}
+
+#map {
+  border: 4px solid darkgray;
+  height: 400px;
+  width: 97vmax;
+}
+
+.branding {
+  background-image: var(--movin-things-branding-url);
+  background-color: white;
+  background-size: 50px 50px;
+  border-radius: 3px;
+  width: 50px;
+  height: 50px;
+}

@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+skinparam style strictuml
+
+participant browser as br
+participant proxy as pr
+control backend as b
+entity tenant_map as t
+
+activate br
+br -> pr: get_configurations()
+deactivate br
+activate pr
+pr -> b: +TENANT_HEADER
+deactivate pr
+activate b
+b -> t: tenant 1
+t --> b: tenant_map[tenant 1]
+b -> t: tenant 2
+t --> b: tenant_map[tenant 2]
+b -> t: tenant n
+t --> b: tenant_map[tenant n]
+b --> pr: union of of results
+deactivate b
+activate pr
+pr --> br
+deactivate pr
+activate br
+
+@enduml

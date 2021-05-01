@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Movin Things Web Component Test App</title>
+    <meta
+      name="Description"
+      content="You can use this starter to build entire apps all with web components using Stencil!"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+    />
+    <meta name="theme-color" content="#16161d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="x-ua-compatible" content="IE=Edge" />
+
+    <script type="module" src="/build/movinthings.esm.js"></script>
+    <script nomodule src="/build/movinthings.js"></script>
+    <link href="/build/movinthings.css" rel="stylesheet" />
+
+    <link rel="apple-touch-icon" href="/assets/icon/moving.png" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <movin-things api="http://127.0.0.1:3000/v1/" config="demo" />
+  </body>
+</html>

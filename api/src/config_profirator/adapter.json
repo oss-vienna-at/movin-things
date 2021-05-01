@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "adapter_id": "demo_id",
+      "filename": "demoadapter",
+      "disabled": false,
+      "headers": ["Accept: application/json"],
+      "notification": {
+        "http": {
+          "url": "http://localhost:3001/v1/update/demo_id"
+        }
+      }
+    },
+    {
+      "adapter_id": "orion_poller",
+      "filename": "orionpoller",
+      "disabled": false,
+      "ms_timeout": 1000,
+      "url": "127.0.0.1:1026/v2/entities",
+      "headers": {
+        "accept": "application/json",
+        "fiware-service": "movinthings3"
+      }
+    }
+  ]
+}

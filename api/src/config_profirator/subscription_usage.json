@@ -1,0 +1,28 @@
+{
+  "poller_usage": {
+    "subscription_id": "pollersubscription",
+    "omit": ["dateObserved", "metadata"],
+    "timestamps": []
+  },
+  "seconddemo_usage": {
+    "subscription_id": "demosubscription"
+  },
+  "demo_usage": {
+    "subscription_id": "demosubscription",
+    "omit": ["remove", "tenant_extractor", "temperature", "dateObserved"],
+    "timestamps": [],
+    "style_defaults": {
+      "color": "green"
+    },
+    "rules": {
+      "speed": {
+        ">": 30,
+        "color": "red"
+      },
+      "battery": {
+        "<": 30,
+        "color": "red"
+      }
+    }
+  }
+}

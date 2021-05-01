@@ -1,0 +1,17 @@
+{
+  "flights-over-austria-usage": {
+    "subscription_id": "flights-over-austria-subscription",
+    "omit": [
+      "sensors",
+      "description",
+      "time_position",
+      "position_source",
+      "spi",
+      "callsign"
+    ],
+    "timestamps": [
+      { "attr": "last_contact", "locale": "de-AT", "tz": "Europe/Vienna" },
+      { "attr": "time_position", "locale": "de-AT", "tz": "Europe/Vienna" }
+    ]
+  }
+}

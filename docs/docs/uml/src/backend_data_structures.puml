@@ -1,0 +1,177 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+scale 0.5
+
+object backend_data_structures
+
+object static_configuration
+note right of static_configuration
+    read from /config/config.json
+end note
+
+object app_config {
+    http_header_tenant : string
+}
+
+object adapter_ngsi {
+    adapter_type
+}
+object constructor_parameters
+adapter_ngsi *-- constructor_parameters
+
+map "Adapter config\nadapter_id => adapter" as ad_config {
+    "adapter_ngsi_id" *--> adapter_ngsi
+}
+
+object object_style_defaults {
+    color : string
+    shape : shape
+    size : int
+    rotation : int
+}
+
+object object_style_rule {
+    expression : string
+    style_attriute : string
+    style_attribute_value : string
+}
+
+object subscription_usage_config {
+    subscription_id
+    omit_attributes : string[]
+    rules : object_style_rule[]
+}
+
+object legend_config {
+    color : string
+    shape : shape
+    size : int
+    description : string
+}
+
+object map_config {
+    width : int
+    height : int
+    resizeable : bool
+    zoomable : bool
+    initial_zoom : int
+    initial_geo_location : geo_location
+    tile_provider : string
+}
+
+
+object configuration {
+    configuration_name : string
+    tenants : string[]
+    subscription_usages : subscription_usage_config[]
+}
+
+map "Component config\nconfiguration_name => configuration" as component_config {
+    "demo_name" *--> configuration
+}
+
+object adapter_parameters
+note right of adapter_parameters
+    Adapter-specific, may contain not only
+    connection data used for subscribing,
+    but also data used during normalization.
+    Not necessary for NGSI, but we still pass
+    it to adapter for object normalization.
+end note
+
+object subscription {
+    subscription_id
+    adapter_id
+}
+subscription *-- adapter_parameters
+
+map "Subscription config\nsubscription_id => subscription" as subscription_config {
+    "subscription_id" *--> subscription
+}
+
+static_configuration *-- app_config
+static_configuration *-- ad_config
+static_configuration *-- component_config
+static_configuration *-- subscription_config
+configuration *-- "1..n" subscription_usage_config
+configuration *-- map_config
+map_config *-- legend_config
+subscription_usage_config *-- object_style_defaults
+subscription_usage_config *-- "1..n" object_style_rule
+
+object adapter {
+    initialize()
+    maintain_subscriptions()
+    normalize_published_object()
+}
+
+map "Adapter map\nadapter_id => adapter" as adapter_map {
+    adapter_id *--> adapter
+}
+
+map "Tenant map\ntenant => configuration_name[]" as tenant_map {
+    "demo_tenant" => [ "demo_name" ]
+}
+
+object normalized_object_1 {
+    to_dto() : object_dto
+    --
+    object_id
+    geo_location : geo_location
+    data : json
+}
+object normalized_object_2 {
+    to_dto() : object_dto
+    --
+    object_id
+    geo_location : geo_location
+    data : json
+}
+
+map "Normalized object map\nobject_id => object" as normalized_object_map {
+    "object_1" *--> normalized_object_1
+    "object_2" *--> normalized_object_2
+}
+
+map "Subscription map\nsubscription_id => normalized_object_map" as sub_map {
+    subscription_id *--> normalized_object_map
+}
+
+object dynamic_data
+note right of dynamic_data
+    computed after validating static configuration
+end note
+
+dynamic_data *-- adapter_map
+dynamic_data *-- tenant_map
+dynamic_data *-- sub_map
+
+class object {
+    object_id
+    last_updated : timestamp
+    geo_location : geo_location
+    data : json
+}
+
+class style {
+    color : string
+    shape : shape
+    size : int
+    rotation : int
+}
+
+class object_dto
+note right of object_dto
+    result of object.to_dto()
+    delivered to frontend component
+end note
+
+object_dto *-- object
+object_dto *-- style
+
+backend_data_structures *-- static_configuration
+backend_data_structures  *-- dynamic_data
+backend_data_structures -- object_dto
+
+@enduml

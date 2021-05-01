@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+skinparam style strictuml
+
+participant browser as br
+participant proxy as pr
+control backend as b
+entity component_config as c
+entity subscription_map as s
+entity normalized_object_map as nom
+entity normalized_object as o
+
+activate br
+br -> pr: get_state(\n\tconfiguration_name,\n\tgeo_bounding_box\n\tlang\n)
+deactivate br
+activate pr
+pr -> b: +TENANT_HEADER
+deactivate pr
+activate b
+b -> c: component_config[configuration_name]\n\t.subscription_usages
+c --> b: [ subscription_usage_config ]
+b -> s: forEach subscription_usage_config.subscription_id
+s --> b: subscription_map[subscription_id] (= normalized_object_map)
+b -> nom: forEach key
+nom --> b: normalized_object
+b -> o: forEach normalized_object:\n\tif object.in(geo_bounding_box):\n\t\tobject.to_dto(\n\t\t\tsubscription_usage_config\n\t\t)
+o --> b: object_dto
+b --> pr: [ object_dto ]
+deactivate b
+activate pr
+pr --> br:
+deactivate pr
+activate br
+
+@enduml

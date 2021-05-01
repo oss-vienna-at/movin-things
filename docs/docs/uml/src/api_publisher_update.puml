@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+skinparam style strictuml
+
+participant publisher as pub
+participant proxy as pr
+control backend as b
+entity subscription_config as s
+entity adapter_map as am
+control adapter as a
+entity normalized_object_map as nom
+
+activate pub
+pub -> pr: request with client_cert\nupdate(\n\tsubscription+objects\n)
+deactivate pub
+activate pr
+pr -> b: +USER_HEADER
+deactivate pr
+activate b
+b -> b: get subscription_id\nfrom request data
+b -> s: subscription_config[subscription_id]\n\t.adapter_id
+s --> b: adapter_id
+b -> am: adapter_map[adapter_id]
+am --> b: subscription
+b -> a: normalize_published_payload(\n\tsubscription.adapter_parameters,\n\tupdate_request_headers,\n\tpayload\n)
+deactivate b
+activate a
+a -> a: forEach object in payload:\n\tnormalize_published_object(\n\t\tsubscription.adapter_parameters,\n\t\tupdate_request_headers,\n\t\tobject\n\t)
+a -> nom: forEach normalized_object:\n\tput object in map
+a --> b:
+deactivate a
+activate b
+b --> pr:
+deactivate b
+activate pr
+pr --> pub:
+deactivate pr
+activate pub
+
+@enduml
