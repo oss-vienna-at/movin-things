@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -r dotenv/config --exec babel-node src/index.js dotenv_config_path=process.env",
-    "start-docker": "node -r dotenv/config ../build/index.js dotenv_config_path=/config/process.env",
+    "start-docker": "node -r dotenv/config build/index.js dotenv_config_path=/config/process.env",
     "test": "./node_modules/.bin/mocha --require @babel/register --recursive"
   },
   "repository": {
