@@ -15,9 +15,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta http-equiv="x-ua-compatible" content="IE=Edge" />
 
-    <script type="module" src="/build/movinthings.esm.js"></script>
-    <script nomodule src="/build/movinthings.js"></script>
-    <link href="/build/movinthings.css" rel="stylesheet" />
+    <script type="module" src="build/movinthings.esm.js"></script>
+    <script nomodule src="build/movinthings.js"></script>
+    <link href="build/movinthings.css" rel="stylesheet" />
     <style>
       /*
      * Override variables defaulted in component's app.css
@@ -26,15 +26,15 @@
         --movin-things-font-family: -apple-system, BlinkMacSystemFont,
           "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Helvetica,
           Arial, sans-serif, "Apple Color Emoji";
-        --movin-things-branding-url: url("http://vmdev9032.adv.magwien.gv.at:3000/assets/leaflet-branding-stadt-wien.png");
+        --movin-things-branding-url: url("https://stp-test.wien.gv.at/movin-things/api/assets/leaflet-branding-stadt-wien.png");
       }
     </style>
-    <link rel="apple-touch-icon" href="/assets/icon/moving.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="assets/icon/moving.png" />
+    <link rel="manifest" href="manifest.json" />
   </head>
   <body>
     <movin-things
-      api="http://vmdev9032.adv.magwien.gv.at:3000/v1/"
+      api="https://stp-test.wien.gv.at/movin-things/api/v1/"
       config="flights-over-austria-config"
     />
   </body>
