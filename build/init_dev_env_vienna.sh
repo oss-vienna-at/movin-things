@@ -8,7 +8,7 @@ bash ./demo/bin/init_dev_env_vienna.sh
 if [ ! -z "${DSC_RUNNING_ON_CI_SERVER}" ] ; then
   # We have no cert in repo, but orion-proxy needs one to start up
   # Use fake. Removed at end of ci_test/test.sh
-  cp ./build/apache_proxy.pem ./api/proxy.env
+  cp ./build/apache_proxy.pem ./orion-proxy/conf/ssl.crt/proxy.pem
 fi
 
 rm -f docker-compose.yml

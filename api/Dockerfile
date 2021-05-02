@@ -8,4 +8,4 @@ RUN apk update && apk upgrade
 
 USER svcuser
 
-CMD date && sleep 5 && npm run start-docker
+CMD date && npm run start-docker

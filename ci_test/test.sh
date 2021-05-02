@@ -29,7 +29,7 @@ fi
 if [ ! -z "${DSC_RUNNING_ON_CI_SERVER}" ] ; then
   # We have no cert in repo, but orion-proxy needs one to start up
   # Created by ./build/init_dev_env_vienna.sh
-  rm -f ./api/proxy.env
+  rm -f ./orion-proxy/conf/ssl.crt/proxy.pem
 fi
 
 exit "${EXIT_CODE}"
