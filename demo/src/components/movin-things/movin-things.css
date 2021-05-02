@@ -37,7 +37,7 @@ h1 {
   border: 0px;
 }
 
-.leaflet-retina .leaflet-control-layers-toggle {
+.leaflet-control-layers-toggle {
   background-image: url(assets/icon/settings.svg);
   background-size: 26px 26px;
 }

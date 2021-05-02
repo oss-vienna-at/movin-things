@@ -35,7 +35,7 @@ export class MovinThings {
   }> = [
     // {id: "moped", geolocation: [48.199, 16.343], marker: Markertype, labelmarker: Markertype}
   ];
-  @State() unknownicon = "/assets/icon/unknown.svg";
+  @State() unknownicon = "assets/icon/unknown.svg";
   /*
    * Component members which don't require rerender thus no @State decorator
    */
