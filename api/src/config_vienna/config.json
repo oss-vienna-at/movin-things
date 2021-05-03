@@ -5,6 +5,7 @@
   "tenant_result_skip": ["name="],
   "tenants": {
     "pace": ["flights-over-austria-config"],
+    "ma01": ["flights-over-austria-config"],
     "profirator": ["flights-over-austria-config"],
     "public": ["flights-over-austria-config"]
   },
