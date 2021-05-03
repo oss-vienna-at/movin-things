@@ -1,15 +1,18 @@
 import express from "express";
+import * as winston from "winston";
+import publisherApiRouter from "./publisherapi/publisherapi";
+import { logRequest, logError } from "./middleware/logging";
 
-const publisherApp = express();
+const app = express();
+
+// logging
+app.use("/v1", logRequest);
+app.use("/v1", logError);
 
 // We expect POST bodies to be JSON
-publisherApp.use(express.json());
+app.use(express.json());
 
-/*
- * Router
- * Possible TODO make routes adapter specific.
- */
-import publisherApiRouter from "./publisherapi/publisherapi";
-publisherApp.use("/v1", publisherApiRouter);
+// router
+app.use("/v1", publisherApiRouter);
 
-export default publisherApp;
+export default app;

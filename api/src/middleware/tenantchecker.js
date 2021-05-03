@@ -5,6 +5,7 @@ import {
   tenantRegEx,
   tenantResultSkip,
 } from "../utils/config";
+import {logger} from "./logging";
 
 let tenantRx = new RegExp(tenantRegEx);
 
@@ -44,6 +45,7 @@ const tenantChecker = function (req, res, next) {
     return res.status(403).send("Forbidden\n");
   }
   res.tenants = tenants;
+  logger.verbose("tenants = " + tenants);
   next();
 };
 

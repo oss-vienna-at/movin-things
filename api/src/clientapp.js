@@ -1,35 +1,38 @@
-/*
- * Main
- */
 import express from "express";
+import clientApiRouter from "./clientapi/clientapi";
+import tenantChecker from "./middleware/tenantchecker";
+import { logRequest, logError } from "./middleware/logging";
 
-const clientApp = express();
+const app = express();
+
+// logging
+app.use("/v1", logRequest);
+app.use("/v1", logError);
+
 // Setup CORS for client
 // TODO: think about making it configurable, e.g. from environment
-clientApp.use(function (req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
   next();
 });
-clientApp.options("/*", function (req, res) {
+app.options("/*", function (req, res) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
   res.header("Access-Control-Allow-Headers", "*");
   res.send(200);
 });
 
-// Middleware
-import tenantChecker from "./middleware/tenantchecker";
-clientApp.use("/v1", tenantChecker);
+// Tenants
+app.use("/v1", tenantChecker);
 
 // We expect POST bodies to be JSON
-clientApp.use(express.json());
+app.use(express.json());
 
 // Router
-import clientApiRouter from "./clientapi/clientapi";
-clientApp.use("/v1", clientApiRouter);
+app.use("/v1", clientApiRouter);
 
 // Statics
-clientApp.use("/assets", express.static("/svc/build/assets"));
+app.use("/assets", express.static("/svc/build/assets"));
 
-export default clientApp;
+export default app;

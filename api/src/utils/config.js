@@ -2,6 +2,7 @@ import tenantConfigs from "./../config/config.json";
 import subscriptionConfigs from "./../config/subscription.json";
 import adapterConfigs from "./../config/adapter.json";
 import usageConfigs from "./../config/subscription_usage.json";
+import logConfig from "./../config/log.json";
 
 let tenantHeader = process.env.TENANT_HEADER; // eslint-disable-line no-undef
 if (tenantConfigs?.tenant_header) {
@@ -66,6 +67,7 @@ let adapterMap;
 // {tenant config usage adapter} structure
 let dynamicAdaoterMap;
 
+
 export {
   PUBLISHER_PORT,
   CLIENT_PORT,
@@ -80,4 +82,5 @@ export {
   subscriptionConfigs,
   adapterMap,
   dynamicAdaoterMap,
+  logConfig,
 };

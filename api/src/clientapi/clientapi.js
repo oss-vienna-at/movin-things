@@ -35,7 +35,6 @@ const getDTOsInArea = (alldtos, maparea) => {
 clientRouter.get("/get_configurations", (req, res) => {
   let tenants = res.tenants;
   let configurationNames = [];
-  console.log("tenants=", tenants);
   for (let tenant of tenants) {
     if (tenantMap[tenant]) {
       configurationNames.push(...tenantMap[tenant]);
