@@ -1,3 +1,4 @@
+import {logger} from "../middleware/logging";
 import express from "express";
 const publisherRouter = express.Router();
 import { adapterMap } from "./../utils/config";
@@ -8,7 +9,7 @@ import { adapterMap } from "./../utils/config";
 // publisher updates subscription
 publisherRouter.post("/update/:adapter_id", function (req, res) {
   if (!req.params?.adapter_id) {
-    console.log("Update has no adapter id");
+    logger.error("Update has no adapter id");
     return res.status(400).send("Bad Request\n").end();
   }
   adapterMap[req.params.adapter_id].normalize_published_payload(req.body);

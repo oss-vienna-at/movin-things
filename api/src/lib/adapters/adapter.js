@@ -1,3 +1,5 @@
+import {logger} from "../../middleware/logging";
+
 class Adapter {
   constructor(config) {
     this.config = config;
@@ -10,7 +12,7 @@ class Adapter {
   async subscribe(usage_id) {} // eslint-disable-line no-unused-vars
 
   normalize_published_payload(dataObjects) {
-    console.log("normalize_publish_payload dataObjects=", dataObjects);
+    logger.error("normalize_publish_payload called from Adapter parent class, unimplemented in concrete class, dataObjects = " + dataObjects);
   }
 }
 

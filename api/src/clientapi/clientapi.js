@@ -60,24 +60,18 @@ clientRouter.post("/init_component", (req, res) => {
    * For every usage config create subscription request
    */
   usage_configs.forEach((usage) => {
-    // console.log("usage=", usage)
     const subid = usageConfigs[usage].subscription_id;
-    // console.log("subid=", subid)
-
     const adapterid = subscriptionConfigs[subid].adapter;
-    // console.log("adapterid=", adapterid)
-
     // adapter might be disabled thus check is needed
     if (adapterMap[adapterid] !== undefined) {
       adapterMap[adapterid].subscribe(usage);
     }
   });
 
-  // Chack if there is subscription key for subscription id
+  // TODO: check, if following comments still apply
+  // Check if there is subscription key for subscription id
   // If not then subscribe
-
   // Add received subscription id to adapter_subscription_id map
-
   return res.json(stripconfig);
 });
 
@@ -96,12 +90,8 @@ clientRouter.post("/get_state", (req, res) => {
 
   let { usage_configs } = configurationsMap[param.configuration_name];
   usage_configs.forEach((usage) => {
-    // console.log("get_state usage=", usage)
     const subid = usageConfigs[usage].subscription_id;
-    // console.log("get_state subid=", subid)
     const adapterid = subscriptionConfigs[subid].adapter;
-    // console.log("adapterid=", adapterid)
-
     // adapter might be disabled thus check is needed
     if (adapterMap[adapterid] !== undefined) {
       let usagedata = adapterMap[adapterid].dtos[usage];
@@ -110,11 +100,7 @@ clientRouter.post("/get_state", (req, res) => {
       }
     }
   });
-  // console.log("flatdtos length=", flatdtos.length)
-
   flatdtos = flatdtos.flat();
-  // console.log("Flat flatdtos=", flatdtos)
-
   const returndtos = getDTOsInArea(flatdtos, param.geo_bounding_box.coords);
   return res.json(returndtos);
 });

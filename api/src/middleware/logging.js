@@ -1,7 +1,6 @@
 import * as winston from "winston"
 import {logConfig} from "../utils/config";
 
-// logging
 const consoleTransport = new winston.transports.Console();
 
 const logFormat = winston.format.combine(

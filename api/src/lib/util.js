@@ -1,3 +1,5 @@
+import {logger} from "../middleware/logging";
+
 export function sortUnique(arr) {
   if (arr.length === 0) return arr;
   arr = arr.sort(function (a, b) {
@@ -31,7 +33,7 @@ export function getOmittedObjectValues(fullobject, omitlist, timestamplist) {
               timeStyle: "short",
             }).format(d);
           } catch (e) {
-            console.log(e);
+            logger.error(e);
           }
         }
       }

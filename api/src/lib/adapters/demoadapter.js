@@ -1,3 +1,4 @@
+import {logger} from "../../middleware/logging";
 import Adapter from "./adapter";
 import request from "supertest";
 import { usageConfigs } from "./../../utils/config";
@@ -82,7 +83,7 @@ class demoAdapter extends Adapter {
       } catch (error) {
         // usage in dto structure but subscription failed
         this.dtos[usage_id] = undefined;
-        console.log("subscribe error=", error);
+        logger.error("subscribe error = " + error);
       }
     }
   }
@@ -115,7 +116,7 @@ class demoAdapter extends Adapter {
           // TODO: check if this is intentional
         })
         .catch((what) => {
-          console.log("Can't update error=", what);
+          logger.error("Can't update error = " + what);
         });
     });
   }

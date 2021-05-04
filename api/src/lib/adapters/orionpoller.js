@@ -1,4 +1,5 @@
 "use strict";
+import {logger} from "../../middleware/logging";
 import Adapter from "./adapter";
 import request from "supertest";
 import { usageConfigs } from "./../../utils/config";
@@ -44,7 +45,7 @@ class orionPoller extends Adapter {
         }
       })
       .catch((what) => {
-        console.log("Can't poll error=", what);
+        logger.error("Can't poll error = " + what);
       });
   }
 

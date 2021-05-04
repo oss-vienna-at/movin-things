@@ -1,4 +1,5 @@
 import { adapterConfigs } from "./../utils/config";
+import {logger} from "../middleware/logging";
 
 const useconfig = async (config) => {
   return config;
@@ -31,7 +32,7 @@ const getAdapters = async () => {
       return new adapterclass[1].default(adapterclass[0]);
     });
   } catch (error) {
-    console.log("getAdapters error=", error);
+    logger.error("getAdapters error = " + error);
   }
 
   let mappedAdapterList = [];

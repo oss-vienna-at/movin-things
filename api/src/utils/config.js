@@ -59,7 +59,7 @@ let adapterMap;
   try {
     adapterMap = await adapters(); // returns promise
   } catch (error) {
-    console.log("error=", error);
+    console.log("error=", error); // don't use logger, would cause circular dependency
   }
 })();
 

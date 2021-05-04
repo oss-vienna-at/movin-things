@@ -15,6 +15,7 @@ export function processTenantHeader(tenantHeaderValue) {
     return [tenantDefault];
   }
 
+  logger.debug("tenant_header_value = " + tenantHeaderValue);
   let match = tenantHeaderValue.match(tenantRx);
   if (!match) {
     return [tenantDefault];
@@ -41,7 +42,7 @@ export function getTenants(req) {
 const tenantChecker = function (req, res, next) {
   let tenants = getTenants(req);
   if (tenants.length === 0) {
-    console.log(error.ERR_TENANT_HEADER_MISSING);
+    logger.error(error.ERR_TENANT_HEADER_MISSING);
     return res.status(403).send("Forbidden\n");
   }
   res.tenants = tenants;
