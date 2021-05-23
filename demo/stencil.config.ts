@@ -7,6 +7,9 @@ export const config: Config = {
   globalStyle: "src/global/app.css",
   globalScript: "src/global/app.ts",
   taskQueue: "async",
+  extras: {
+    scriptDataOpts: true,
+  },
   env: {
     DEVHEADER: devvars.DEVHEADER,
     DEVVALUE: devvars.DEVVALUE,
@@ -16,12 +19,28 @@ export const config: Config = {
   outputTargets: [
     {
       type: "www",
+      copy: [
+        {
+          src: 'assets',
+          dest: 'build/assets',
+        },
+        {
+          src: 'assets',
+        },
+        {
+          src: '../node_modules/leaflet/dist/images',
+          dest: 'images',
+        }
+      ],
       // comment the following line to disable service workers in production
       serviceWorker: null,
       baseUrl: "https://myapp.local/",
     },
     {
       type: "dist",
+      copy: [
+        { src: 'assets' }
+      ]
     },
   ],
 };

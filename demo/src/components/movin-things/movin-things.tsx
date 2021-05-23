@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Element, Env } from "@stencil/core"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import { Component, h, Prop, State, Element, Env, getAssetPath } from "@stencil/core"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import L, { LatLng, LatLngExpression, Marker } from "leaflet";
 import { initComponent, getState } from "./communications";
 import deleteProperty = Reflect.deleteProperty;
@@ -7,13 +7,13 @@ import deleteProperty = Reflect.deleteProperty;
   tag: "movin-things",
   styleUrl: "movin-things.css",
   shadow: true,
+  assetsDirs: ["assets", "images"]
 })
 export class MovinThings {
   @Element() el: HTMLElement;
   @Prop() api: string;
   @Prop() config: string;
   @Prop() forcedlocale: string;
-  imagedecorator = "/assets/icon/moving.png";
   tileLayers: Array<{ id: string; name: string; url: string }> = [];
   maxzoom = "19";
   minzoom = "11";
@@ -33,16 +33,18 @@ export class MovinThings {
     marker: Marker;
     labelmarker: Marker;
   }> = [
-    // {id: "moped", geolocation: [48.199, 16.343], marker: Markertype, labelmarker: Markertype}
   ];
-  @State() unknownicon = "assets/icon/unknown.svg";
+  @State() unknownicon = "unknown.svg";
   /*
    * Component members which don't require rerender thus no @State decorator
    */
   layergroupref: L.LayerGroup = null;
   labellayergroupref: L.LayerGroup = null;
+
+  unknowniconurl=getAssetPath(`assets/icon/${this.unknownicon}`)
+
   unknownLeafletIcon = L.icon({
-    iconUrl: this.unknownicon,
+    iconUrl: this.unknowniconurl,
     iconSize: [32, 32],
     iconAnchor: [16, 16],
     popupAnchor: [0, -8],
@@ -300,7 +302,6 @@ export class MovinThings {
     const basemaps = this.tileLayers.map(
       (layerconfig: { id: string; name: string; url: string }) => {
         return L.tileLayer.wms(layerconfig.url, {
-          // attribution: this.attribution,
           id: layerconfig.id,
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
@@ -312,11 +313,12 @@ export class MovinThings {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   render(): any {
     return (
-      <div>
-        <main>
-          <div part="idmap" id="map" style={{ height: "95vh" }}></div>
+      <div style={{ height: "100%" }}>
+        <main style={{ height: "100%" }}>
+          <div part="idmap" id="map"></div>
         </main>
       </div>
     );

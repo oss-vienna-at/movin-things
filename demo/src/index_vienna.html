@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8"/>
     <title>Flights over Austria</title>
     <meta
-      name="Description"
-      content="You can use this starter to build entire apps all with web components using Stencil!"
+            name="Description"
+            content="You can use this starter to build entire apps all with web components using Stencil!"
     />
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
-    <meta name="theme-color" content="#16161d" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta http-equiv="x-ua-compatible" content="IE=Edge" />
+    <meta name="theme-color" content="#16161d"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
 
-    <script type="module" src="build/movinthings.esm.js"></script>
-    <script nomodule src="build/movinthings.js"></script>
-    <link href="build/movinthings.css" rel="stylesheet" />
+    <script type="module" src="/build/movinthings.esm.js"></script>
+    <script nomodule src="/build/movinthings.js"></script>
+    <link href="/build/movinthings.css" rel="stylesheet"/>
     <style>
-      /*
-     * Override variables defaulted in component's app.css
-     */
-      :root {
-        --movin-things-font-family: -apple-system, BlinkMacSystemFont,
-          "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Helvetica,
-          Arial, sans-serif, "Apple Color Emoji";
-        --movin-things-branding-url: url("https://stp-test.wien.gv.at/movin-things/api/assets/leaflet-branding-stadt-wien.png");
-      }
+        /*
+       * Override variables defaulted in component's app.css
+       */
+        :root {
+            --movin-things-font-family: -apple-system, BlinkMacSystemFont,
+            "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Helvetica,
+            Arial, sans-serif, "Apple Color Emoji";
+            --movin-things-branding-url: url("https://stp-test.wien.gv.at/movin-things/api/assets/leaflet-branding-stadt-wien.png");
+        }
     </style>
-    <link rel="apple-touch-icon" href="assets/icon/moving.png" />
-    <link rel="manifest" href="manifest.json" />
-  </head>
-  <body>
-    <movin-things
-      api="https://stp-test.wien.gv.at/movin-things/api/v1/"
-      config="flights-over-austria-config"
-    />
-  </body>
+    <link rel="apple-touch-icon" href="/assets/icon/moving.png"/>
+    <link rel="manifest" href="/manifest.json"/>
+</head>
+<body style="height: 100vh; width: 100vw;">
+<div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center; height: 100%;">
+    <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: center;">
+        <h1>MovinThings Demo</h1>
+        <h2>Flüge über Österreich</h2>
+    </div>
+    <div style="height: 80vh; width: 90%;">
+        <movin-things
+                api="https://stp-test.wien.gv.at/movin-things/api/v1/"
+                config="flights-over-austria-config"
+        />
+    </div>
+</div>
+</body>
 </html>

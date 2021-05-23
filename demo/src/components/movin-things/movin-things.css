@@ -38,14 +38,19 @@ h1 {
 }
 
 .leaflet-control-layers-toggle {
-  background-image: url(assets/icon/settings.svg);
+  background-image: var(--movin-things-settings-url);
+	width: 32px;
+	height: 32px;
+	}
+
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: var(--movin-things-settings-url);
   background-size: 26px 26px;
 }
 
 #map {
-  border: 4px solid darkgray;
-  height: 400px;
-  width: 97vmax;
+  width: 100%;
+  height: 100%;
 }
 
 .branding {

@@ -9,22 +9,43 @@ import {
   adapterMap,
 } from "./../utils/config";
 
+const halfcircle=180.0;
+
+const getUnrotatedValue = (rotated) => {
+  const fullcircle=2*halfcircle;
+  let unrotated=rotated%fullcircle;
+
+  unrotated=( unrotated > halfcircle ) ? (unrotated-fullcircle) :
+      (unrotated < (-halfcircle)) ? (unrotated+fullcircle) : unrotated
+
+  return unrotated;
+}
+
 /*
  * Get DTOs inside mapbox
- * TODO: coordinate checks and negative coordinates
  */
 const getDTOsInArea = (alldtos, maparea) => {
-  return alldtos.reduce((insiders, point) => {
+  let bottom=maparea[0][0];
+  let top=maparea[1][0];
+  let left=maparea[0][1];
+  let right=maparea[1][1];
+  left=getUnrotatedValue( left );
+  right=getUnrotatedValue( right );
+
+  let width=(right > left) ? ( right - left ) : ( (halfcircle + right) + (halfcircle - left) )
+  let visible=[];
+  visible=alldtos.reduce((insiders, point) => {
     if (
-      maparea[0][0] < point.geolocation[0] &&
-      point.geolocation[0] < maparea[1][0] &&
-      maparea[0][1] < point.geolocation[1] &&
-      point.geolocation[1] < maparea[1][1]
+        bottom < point.geolocation[0] &&
+        point.geolocation[0] < top &&
+        (right - width) < point.geolocation[1] &&
+        point.geolocation[1] < (left + width)
     ) {
       insiders.push(point);
     }
     return insiders;
-  }, []);
+  }, visible);
+  return visible;
 };
 
 /*

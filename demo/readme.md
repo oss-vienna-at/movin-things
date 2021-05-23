@@ -1,3 +1,21 @@
+# Usage in HTML page
+
+To get correct path to assets ```data-resources-url``` needs to be set. For example
+```
+<script type="module" src="https://unpkg.com/movinthings@1.0.0/dist/movinthings/movinthings.esm.js"
+data-resources-url="https://unpkg.com/movinthings@1.0.0/dist/movinthings/"
+data-stencil-namespace="movinthings" crossorigin=""></script>
+```
+Also element height size have to be countable like following
+```
+<body style="height: 400px; width: 50%;" >
+    <movin-things ...
+     ```
+     If using percentage then parent element should have fixed height value. If parent element has
+     percentage value then its parent should have fixed value and so on. Otherwise component height
+     cannot be determined and component is not visible.
+```
+
 # Development Setup
 
 Create file `devsecrets.json` to same location where `package.json` is.

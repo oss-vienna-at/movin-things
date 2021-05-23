@@ -3,7 +3,7 @@
 /api/node_modules/
 /api/src/config
 /orion-proxy/conf/ssl.crt/proxy.pem
-/demo/movin-things/node_modules/
+/demo/component-library-react
 /demo/node_modules/
 /api/proxy.env
 /demo/src/index.html

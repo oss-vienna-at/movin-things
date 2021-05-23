@@ -12,7 +12,8 @@
   --movin-things-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
-  --movin-things-branding-url: url(assets/icon/leaflet-branding-movin-things.png);
+  --movin-things-branding-url: url("assets/icon/leaflet-branding-movin-things.png");
+  --movin-things-settings-url: url("assets/icon/settings.svg");
 }
 
 body {

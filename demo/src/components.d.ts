@@ -6,40 +6,38 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-  interface MovinThings {
-    api: string;
-    config: string;
-    forcedlocale: string;
-  }
+    interface MovinThings {
+        "api": string;
+        "config": string;
+        "forcedlocale": string;
+    }
 }
 declare global {
-  interface HTMLMovinThingsElement
-    extends Components.MovinThings,
-      HTMLStencilElement {}
-  var HTMLMovinThingsElement: {
-    prototype: HTMLMovinThingsElement;
-    new (): HTMLMovinThingsElement;
-  };
-  interface HTMLElementTagNameMap {
-    "movin-things": HTMLMovinThingsElement;
-  }
+    interface HTMLMovinThingsElement extends Components.MovinThings, HTMLStencilElement {
+    }
+    var HTMLMovinThingsElement: {
+        prototype: HTMLMovinThingsElement;
+        new (): HTMLMovinThingsElement;
+    };
+    interface HTMLElementTagNameMap {
+        "movin-things": HTMLMovinThingsElement;
+    }
 }
 declare namespace LocalJSX {
-  interface MovinThings {
-    api?: string;
-    config?: string;
-    forcedlocale?: string;
-  }
-  interface IntrinsicElements {
-    "movin-things": MovinThings;
-  }
+    interface MovinThings {
+        "api"?: string;
+        "config"?: string;
+        "forcedlocale"?: string;
+    }
+    interface IntrinsicElements {
+        "movin-things": MovinThings;
+    }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
-  export namespace JSX {
-    interface IntrinsicElements {
-      "movin-things": LocalJSX.MovinThings &
-        JSXBase.HTMLAttributes<HTMLMovinThingsElement>;
+    export namespace JSX {
+        interface IntrinsicElements {
+            "movin-things": LocalJSX.MovinThings & JSXBase.HTMLAttributes<HTMLMovinThingsElement>;
+        }
     }
-  }
 }
