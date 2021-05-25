@@ -5,7 +5,8 @@
   "tenant_result_skip": ["name="],
   "tenants": {
     "pace": ["simple", "fancy"],
-    "profirator": ["fancy", "demo", "demo2"]
+    "profirator": ["fancy", "demo", "demo2"],
+    "public": ["fancy", "demo", "demo2"]
   },
   "configurations": {
     "demo": {

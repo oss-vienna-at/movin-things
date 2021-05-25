@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Element, Env, getAssetPath } from "@stencil/core"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import { Component, h, Prop, State, Element, getAssetPath } from "@stencil/core"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import L, { LatLng, LatLngExpression, Marker } from "leaflet";
 import { initComponent, getState } from "./communications";
 import deleteProperty = Reflect.deleteProperty;
@@ -25,7 +25,6 @@ export class MovinThings {
   title_attribute: string;
   private readonly _uninitialized_timeout_id = -1;
   timeoutID: number = this._uninitialized_timeout_id;
-  @State() tenants: Array<string> = Env.DEVTENANTS ? Array(Env.DEVTENANTS) : [];
   @State() maparea: L.Map = null;
   @State() things: Array<{
     id: string;
@@ -284,7 +283,6 @@ export class MovinThings {
       this.setMapLayers,
       this.showError,
       this.config,
-      this.tenants.toString(),
       this.api
     );
   }

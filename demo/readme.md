@@ -16,22 +16,6 @@ Also element height size have to be countable like following
      cannot be determined and component is not visible.
 ```
 
-# Development Setup
-
-Create file `devsecrets.json` to same location where `package.json` is.
-Add contents for `devsecrets.json` should be something like
-
-```
-{
-  "DEVHEADER" : "secret-header",
-  "DEVVALUE" : "secret-value();",
-  "DEVTENANTS": "tenantone,tenanttwo",
-  "DEVBACKEND": "localhost:3000/v1/"
-}
-```
-
-and make sure that `devsecrets.json` will never end up in git repository.
-
 # Localization
 
 Start point? https://github.com/ionic-team/ionic-stencil-conference-app/issues/69

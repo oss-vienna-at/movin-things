@@ -1,32 +1,18 @@
-import { Env } from "@stencil/core";
+let hostpath, apiheaders;
 
-const headeradd = Env.DEVHEADER;
-const devheadervalue = Env.DEVVALUE;
-let hostpath = Env.DEVBACKEND;
-
-let apiheaders;
-
-function setupApiHeaders(tenantlist: string): void {
+function setupApiHeaders(): void {
   apiheaders = new Headers();
-  const tenants = headeradd ? headeradd : "tenants";
-  const tenantsvalue = headeradd
-    ? devheadervalue + `tenants(list=${tenantlist});`
-    : `(list=${tenantlist});`;
   apiheaders.append("Content-Type", "application/json");
-  if (headeradd) {
-    apiheaders.append(tenants, tenantsvalue);
-  }
 }
 
 async function initComponent(
   setupLayers: (any) => void,
   onError: (string) => void,
   config: string,
-  tenantlist: string,
   api?: string
 ): Promise<void> {
   hostpath = api ? api : hostpath;
-  setupApiHeaders(tenantlist);
+  setupApiHeaders();
   const bodydata = `{"configuration_name": "${config}"}`;
   const request = new Request(`${hostpath}init_component`, {
     method: "POST",

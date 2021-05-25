@@ -52,7 +52,7 @@ const getDTOsInArea = (alldtos, maparea) => {
  * Client REST API
  */
 
-// gets a list of configurations available for tenant
+// gets a list of configurations available for tenant; currently unused
 clientRouter.get("/get_configurations", (req, res) => {
   let tenants = res.tenants;
   let configurationNames = [];

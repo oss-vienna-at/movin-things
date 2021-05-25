@@ -1,7 +1,6 @@
 import { Config } from "@stencil/core";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import devvars from "./devsecrets.json";
 export const config: Config = {
   namespace: "MovinThings",
   globalStyle: "src/global/app.css",
@@ -9,12 +8,6 @@ export const config: Config = {
   taskQueue: "async",
   extras: {
     scriptDataOpts: true,
-  },
-  env: {
-    DEVHEADER: devvars.DEVHEADER,
-    DEVVALUE: devvars.DEVVALUE,
-    DEVTENANTS: devvars.DEVTENANTS,
-    DEVBACKEND: devvars.DEVBACKEND,
   },
   outputTargets: [
     {
