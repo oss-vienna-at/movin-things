@@ -20,3 +20,19 @@ services:
       default:
         aliases:
           - svc.docker
+
+  docs:
+    build:
+      context: "docs"
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: "magwien/movin-things-docs:dev"
+    ports:
+      - "8000:80"
+    restart: "unless-stopped"
+    networks:
+      default:
+        aliases:
+          - docs.docker

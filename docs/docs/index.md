@@ -2,66 +2,68 @@
 
 This is the documentation of MovinThings, a __visualization
 web component__ for __things moving in geo-space__, in other
-words: a map with moving dots and more.
+words: a map with moving dots and more. Data comes from a __configurable,
+generic backend__. Here's the screenshot of a demo:
 
-Data comes from a __configurable, generic backend__, and
-there's also a __starter project__, that shows off embedding
-of the component.
+![Flights over Austria](img/screenshot_flights_over_austria.png)
 
-## Projects
+## Purpose
+
+MovinThings provides a generic visualization component for
+the [FIWARE Orion Context
+Broker](https://fiware-orion.readthedocs.io/en/master/).
+Find out more about FIWARE on the [FIWARE Home
+Page](https://www.fiware.org/).
+
+MovinThings is released under the [EUPL
+1.2](https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12).
+
+## Contributors
+
+MovinThings is developed in a collaboration between PACE,
+the innovation team of the [City of Vienna,
+Austria](https://www.wien.gv.at/), [Swiss Smart
+Technologies](https://swiss-smart.tech) and
+[Profirator](https://profirator.fi).
+
+## Project structure
 
 MovinThings consists of
 
-* a [Stencil](https://stenciljs.com/) project, that produces
-  a web component and deploys it to NPM
+* a [Stencil](https://stenciljs.com/) web component. This is 
+  the frontend. It can be embedded in a simple HTML page or
+  any modern Web Application, regardless of being a _Single
+  Page Application_ (SPA), a _Progressive Web App_ (PWA), or
+  just a server-rendered web app.
 
 * a backend project created with
   [Nodejs](https://nodejs.org/) and
-  [Express](https://expressjs.com/). The backend is a
-  docker-compose app, created to be compatible with [Docker
-  Smart CI](https://stp-test.wien.gv.at/docker-smart-ci/)
+  [Express](https://expressjs.com/).
 
-* a starter project in [React](https://reactjs.org/),
-  created to show off the deployment of the web component.
-  In order to do this, the backend must be deployed with a
-  component configuration "demo", and a FIWARE context
-  broker must be available for subscription, and to publish
-  data to the backend. The project is a docker-compose app,
-  created to be compatible with [Docker Smart
-  CI](https://stp-test.wien.gv.at/docker-smart-ci/)
-
-* this project, where all is documented
-
-These projects each have their own git repository:
-
-* [movin-things-component](https://bitbucket.org/ma14pace/movin-things-component)
-* [movin-things-backend](https://bitbucket.org/ma14pace/movin-things-backend)
-* [movin-things-starter](https://bitbucket.org/ma14pace/movin-things-starter)
-* [movin-things-docs](https://bitbucket.org/ma14pace/movin-things-docs)
+* this documentation
 
 ## Goals & Non-Goals
 
 ### Goals
 
-* Component, embeddable in any page or app, regardless of
-  framework, preferably a Web Component
+* Web component, embeddable in any page or app, regardless of
+  framework
 
 * Display moving objects on a map, regardless of object type
   and data origin
 
-* Object data is subscribed to from multiple sources via
-  adapters and selected by adapter-specific expressions
+* Object data is read from multiple sources via
+  adapters and selected by adapter-specific configurations
 
-* Implementation of at least one adapter, the FIWARE NGSIv2
-  adapter
+* Implementation of at least one adapter, the FIWARE Orion Polling 
+  Adapter
 
 * Backend configurable per instance in terms of adapters
 
 * Frontend configurable via named configurations stored at
   backend
 
-* Frontend is responsive and can be configured to function
-  on a smartphone, albeit with minimal interactivity
+* Frontend is responsive and functions on mobile devices
 
 * Does not require web sockets, SSE or non-HTTP protocols
 
@@ -76,5 +78,9 @@ These projects each have their own git repository:
 
 * No event histories: what the web component sees is a
   current state. State changes between two updates of the
-  component may be lost
-
+  component may get lost
+  
+* no usage of Context Broker subscriptions. The backend polls 
+  Orion by querying periodically. The frontend displays the result.
+  Subscribing to incremental updates would require holding state
+  and would essentially replicate Context Broker functionality.
