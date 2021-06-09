@@ -13,7 +13,7 @@ entity normalized_object_map as nom
 entity normalized_object as o
 
 activate br
-br -> pr: get_state(\n\tconfiguration_name,\n\tgeo_bounding_box\n\tlang\n)
+br -> pr: get_state(\n\tconfiguration_name,\n\tgeo_bounding_box\n)
 deactivate br
 activate pr
 pr -> b: +TENANT_HEADER

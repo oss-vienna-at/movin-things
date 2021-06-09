@@ -6,9 +6,8 @@ nav:
   - "Web Component" : "web_component.md"
   - "Backend" :
     - "Overview" : "backend_overview.md"
-    - "API and data structures" : "backend_api_data.md"
+    - "Configuration" : "backend_configuration.md"
     - "Behaviour" : "backend_behaviour.md"
-  - "Starter project" : "starter.md"
 markdown_extensions:
   - admonition
   - attr_list

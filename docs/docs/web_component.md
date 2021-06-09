@@ -1,15 +1,13 @@
 # Web Component
 
-!!! note
-    The component has its [own repo](https://bitbucket.org/ma14pace/movin-things-component)
-
 ## What it is
 
 * The __web component__ is embeddable in HTML and in JS web apps
-* [Stencil](https://stenciljs.com/) is the target framework
-  and will be __published to NPM__
-* Bindings for HTML and React need to be documented and published
-  as well
+* It uses [Stencil](https://stenciljs.com/) as framework
+* The component will __not__ be __published on NPM__, because it is 
+  useless without the backend. For now, we expect users to clone
+  [the repo](https://github.com/oss-vienna-at/movin-things) and
+  install component and backend together
 
 ## Look and feel
   
@@ -17,65 +15,73 @@
 * With an icon in the lower right corner, we can switch
   between two different background tile sets, one for
   street map view and one for satellite map view
-* We need to support at least two tiles providers, namely
+* Tiles providers can be configured, 
   [basemap.at](https://basemap.at/index_en.html) (required in
-  Austria) and OpenStreetMap for everyone else
-* Dots reperesent objects
-* Objects have attributes: __visible__ (like shape, rotation, color)
-  or __hidden__ (title, description, optionally an array of links:
-  `[{url_text, url}, ...]`)
+  Austria) and OpenStreetMap have been tested
+* Dots represent objects
+* Objects have attributes. One of them can be configured as __name__.
+  Its value is shown beneath the dot
 * Objects can be clicked
-* In order to facilitate that, the map can be frozen in time
 * A clicked dot pops up an overlay for __inspecting__ the hidden
   attributes
-* A click on a __link__ opens the link in a new window/tab.
-  The content of the link target is out of scope
-* "Closing" the popup unfreezes the map, animating to the current
-  position of the last inspected object
-* "Close and follow" does the same, but also __follows__ the last
-  inspected object
-* The map component has no headline
-* The map has a legend, that can be popped up, when a `?` 
-  icon is clicked. The Legend has a description for each 
-  type of dot. The legend is also configured in and supplied 
-  by the backend
+* The map component has no headline, it's just a frame
+* Styling the component happens via CSS variables
 
 ## How to use it
 
-* Syntax in HTML: `<movin-things api="api/" config="demo" lang="de"/>`
-* The component has attributes `api` (= backend URL, normally
-  relative), `config` (= configuration name used in backend)
-  and `lang`.
-* The component mostly uses icons for navigation and switching
-  between backgrounds, but it still needs `ALT` texts for those
-  icons. We support a list of languages, and for each language,
-  the translations for all `ALT` texts is coded into the 
-  component. Which language to use, is decided by the value of
-  the component's `lang` attribute. The embedding page is 
-  supposed to supply a supported language code. Component
-  language is an explicit parameter, because we need to keep 
-  the language within the component in sync with the 
-  language of the embedding page.
-* Backend API calls are expected to be made to a relative backend
-  URL, typically starting with `api/`. If an absolute URL is used,
-  that does not have the index URL of the embedding page as
-  prefix, then the backend has to handle CORS
-* The web component is pre-authenticated, that means, when you 
-  have access to it, you also have access to the data in that 
-  backend
+### Syntax in HTML:
+
+The web component has two parameters, the URL of the backend API,
+and the name of a configuration defined in the backend.
+
+```html
+<movin-things
+  api="api/v1/"
+  config="flights-over-austria-config"
+  />
+```
+
+Alternatively, the API URL can be absolute, host included,
+but if the host differs from that serving the embedding
+page, this might lead to CORS problems.
+
+```html
+<movin-things
+  api="https://stp-test.wien.gv.at/movin-things/api/v1/"
+  config="flights-over-austria-config"
+  />
+```
 
 ## Internals
 
 * Upon __initialization__, the map component calls back to its
   API, in order to get the __configuration__ associated with the
-  `configuration_name`
+  value of `config`
+  
 * The component has several __behavioral properties__, that can be
-  __configured at the backend__, for instance size, resizeability,
-  initial_position, initial_zoom, ...
-* From the POV of the component, it gets JSON objects, representing all objects observed by the configuration. The 
-  JSON objects contain position, visual and . It's just painting 
-  silly dots on a canvas, with configuration determining how 
-  they are painted
-* Protocol between component and backend is specified in
+  __configured at the backend__, for instance geo-location of
+  the center of the map, initial zoom, minimum and maximum
+  zoom, update interval, ...
+
+* The component polls the backend and gets JSON objects,
+  representing objects observed by the configuration.
+  The JSON objects contain a geo-location and whatever 
+  attributes the observed objects have
+
+* The protocol between component and backend is specified in
   [Backend Behaviour](backend_behaviour.md) under the heading
   "Client REST API".
+
+## Possible future enhancements
+
+* The map can be frozen in time
+
+* Attribute values can be links, and a click on a 
+  __link__ opens the link in a new window/tab
+
+* Configurable object types with different colors/icons based on 
+  attribute values, configured on backend, evaluated in the component
+
+* Orientation of the object icon can indicate direction. This can't 
+  be properly extracted from the data, it would have to be in 
+  the raw sensor values

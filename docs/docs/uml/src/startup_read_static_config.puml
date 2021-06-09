@@ -11,7 +11,7 @@ control validator as v
 
 b -> c: read_static()
 activate c
-c -> cd: "/config/config.json"
+c -> cd: "/svc/build/config"
 c -> v : validate(static_config)
 deactivate c
 activate v

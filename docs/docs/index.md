@@ -2,8 +2,13 @@
 
 This is the documentation of MovinThings, a __visualization
 web component__ for __things moving in geo-space__, in other
-words: a map with moving dots and more. Data comes from a __configurable,
-generic backend__. Here's the screenshot of a demo:
+words: a map with moving dots and more. Data comes from a
+__configurable, generic backend__, normally polling a
+[FIWARE Orion Context
+Broker](https://fiware-orion.readthedocs.io/en/master/).
+Other data sources can be adapted to.
+
+Here's the screenshot of a demo:
 
 ![Flights over Austria](img/screenshot_flights_over_austria.png)
 

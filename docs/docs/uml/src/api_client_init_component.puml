@@ -18,6 +18,7 @@ deactivate pr
 activate b
 b -> c:
 c --> b: component_config[configuration_name]\n\t.map_config
+b --> b: start subscriptions
 b --> pr:
 deactivate b
 activate pr

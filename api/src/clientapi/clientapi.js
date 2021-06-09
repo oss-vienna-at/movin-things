@@ -49,6 +49,18 @@ const getDTOsInArea = (alldtos, maparea) => {
 };
 
 /*
+ * Check if configuration is available to tenant
+ */
+const isAvailable = (configName, allTenants) => {
+  for (let tenant of allTenants) {
+    if (tenantMap[tenant]?.includes(configName)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/*
  * Client REST API
  */
 
@@ -70,6 +82,9 @@ clientRouter.post("/init_component", (req, res) => {
   let param = req.body;
   if (!param?.configuration_name) {
     return res.status(400).send("Bad Request\n");
+  }
+  if (!isAvailable(param.configuration_name, res.tenants)) {
+    return res.status(403).send("Forbidden\n");
   }
 
   let mapconfig = configurationsMap[param.configuration_name];
@@ -102,6 +117,9 @@ clientRouter.post("/get_state", (req, res) => {
   let param = req.body;
   if (!param?.configuration_name) {
     return res.status(400).send("Bad Request\n");
+  }
+  if (!isAvailable(param.configuration_name, res.tenants)) {
+    return res.status(403).send("Forbidden\n");
   }
   if (!param?.geo_bounding_box) {
     return res.status(400).send("Bad Request\n");
