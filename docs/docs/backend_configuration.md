@@ -95,6 +95,12 @@ backend. Subscription (remember: that's not an Orion
 subscription, it means just to start polling) will begin,
 once the first web component instance has initialized.
 
+!!! note
+    The backend is supposed to hold "the entire world". The
+    backend does not use the geo bounding box given as 
+    parameter to `get_state` for anything but filtering. 
+    
+
 ## subscription.json
 
 This configuration currently is an unnecessary additional
