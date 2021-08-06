@@ -9,6 +9,8 @@ services:
         - https_proxy
         - no_proxy
     image: "magwien/movin-things-api:dev"
+    labels:
+      - "eu.container-smart-ci.portal-role=api:3000,publisher:3001"
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -16,7 +18,11 @@ services:
       - api/proxy.env
     volumes:
       - "./api/process.env:/config/process.env"
-      - "./api/src/config_vienna:/svc/build/config"
+      - "./api/src/config_vienna/adapter.json:/svc/build/config/adapter.json"
+      - "./api/src/config_vienna/config.json:/svc/build/config/config.json"
+      - "./api/src/config_vienna/log.json:/svc/build/config/log.json"
+      - "./api/src/config_vienna/subscription.json:/svc/build/config/subscription.json"
+      - "./api/src/config_vienna/subscription_usage.json:/svc/build/config/subscription_usage.json"
     depends_on:
       - orion-proxy
     mem_limit: 512m
@@ -39,8 +45,7 @@ services:
     ports:
       - "1026:1026"
     volumes:
-      - "./orion-proxy/conf:/usr/local/apache2/conf"
-      - "./orion-proxy/conf.d:/usr/local/apache2/conf.d"
+      - "./orion-proxy/conf/ssl.crt/proxy.pem:/usr/local/apache2/conf/ssl.crt/proxy.pem"
     restart: unless-stopped
     networks:
       default:
