@@ -28,8 +28,7 @@ MovinThings is released under the [EUPL
 
 MovinThings is developed in a collaboration between PACE,
 the innovation team of the [City of Vienna,
-Austria](https://www.wien.gv.at/), [Swiss Smart
-Technologies](https://swiss-smart.tech) and
+Austria](https://www.wien.gv.at/) and
 [Profirator](https://profirator.fi).
 
 ## How to read the docs
